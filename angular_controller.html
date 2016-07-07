@@ -1,0 +1,44 @@
+<html ng-app='myApp'>
+<head>
+	<title>Angular</title>
+	<script src='https://ajax.googleapis.com/ajax/libs/angularjs/1.3.5/angular.min.js'></script>
+	<script type="text/javascript">
+
+		var myAppModule = angular.module('myApp', []);
+
+		myAppModule.controller('studentsController', function($scope){
+			//$scope variable is what allows the controller to pass data to the view it controls.
+			//The $scope object is the glue between the controller and the view.
+			$scope.students =  [
+			{name: 'Alex', age: 25}, 
+			{name: 'Erin', age: 30}, 
+			{name: 'Erick', age: 28}, 
+			{name: 'Brian', age: 33}
+			];
+		$scope.addStudent = function(){
+			//this is a function to add the inputs to the students object
+			//changes in the $scope data will be updated on the view AND changes on the view will be updated in the $scope.
+			$scope.students.push($scope.newStudent);
+			//The values in the form elements were added as a JSON object to the array using the standard .push() method on the $scope.students array. Since we changed $scope data, the data-binding feature recognized that the data in the ng-repeat loop needed to be updated so one more list item was added to reflect this.
+			//this new line clears the newStudent input so you could add another
+			$scope.newStudent = {};
+		}
+	});
+	//Using the ng-controller directive gives all of the HTML encapsulated by the parent div access to the specified controller and its associated scope.
+	</script>
+</head>
+<body>
+	<div ng-controller="studentsController">
+		<ul>
+			<li ng-repeat='student in students'>Name: {{ student.name }}, Age: {{ student.age }}</li>
+		</ul>
+		<h3>Add a new student!</h3>
+		<form>
+			Name: <input type="text" ng-model="newStudent.name">
+			Age: <input type="text" ng-model="newStudent.age">
+			<input type="submit" value="Add New Student" ng-click="addStudent()">
+			<!-- The ng-click directive executed a method we assigned to $scope called addStudent() -->
+		</form>
+	</div>
+</body>
+</html>
