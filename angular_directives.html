@@ -5,6 +5,7 @@
 	<title>Directives</title>
 	<script src='https://ajax.googleapis.com/ajax/libs/angularjs/1.3.5/angular.min.js'></script>
 	<script>
+		//In Angular, controllers are not responsible for obtaining data; they are only expected to pass data to the views by managing the $scope object.
 		var app = angular.module('app', []);
 		app.controller('divController', ['$scope', function($scope) {
 		$scope.players =  [
